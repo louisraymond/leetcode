@@ -13,6 +13,7 @@
 
 let findHeight = (root) => {
     if (!root) return 0
+
     return Math.max(findHeight(root.left),findHeight(root.right)) + 1
 }
 var diameterOfBinaryTree = function(root) {
@@ -22,3 +23,5 @@ var diameterOfBinaryTree = function(root) {
 
     return Math.max(current, diameterOfBinaryTree(root.right), diameterOfBinaryTree(root.left))
 };
+
+// This is a terrible solution with T: O(n^2) S: O(h) where h is the height of the tree
