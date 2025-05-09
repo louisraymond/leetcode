@@ -2,28 +2,19 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var permute = function(nums) {
-    let results = [], current= [], used = {}
+var permute = function (nums) {
+    if (nums.length === 0) return [[]]
 
-    let dfs = () => {
-        if (current.length === nums.length){
-            results.push([...current])
-            return null
-        }
+    const permutations = permute(nums.slice(1))
+    const results = []
 
-        for (let  i = 0; i< nums.length; i++){
-            let value = nums[i]
-
-            if (used[value]) continue
-            used[value] = true
-            current.push(value)
-            dfs()
-
-            used[value] = false
-            current.pop()
+    for (const perm of permutations) {
+        for (let i = 0; i <= perm.length; i++) {
+            let copy = [...perm]
+            copy.splice(i, 0, nums[0])
+            results.push(copy)
         }
     }
 
-    dfs()
     return results
 };
