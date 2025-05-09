@@ -22,3 +22,5 @@ var subsetsWithDup = function (nums) {
     dfs(0)
     return results.sort()
 };
+
+// This is possibly the worst solution, with T: O(2N∗NLogN), S: O(2^n*n) 
