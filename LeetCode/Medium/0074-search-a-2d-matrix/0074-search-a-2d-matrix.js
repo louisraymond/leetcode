@@ -9,7 +9,9 @@ var searchMatrix = function (matrix, target) {
         let left = 0, right = matrix.length - 1
         while (left <= right) {
             let mid = (left + right) >> 1
-            matrix[mid][0] <= target ? left = mid + 1 : right = mid - 1
+            matrix[mid][0] <= target ? left = mid + 1 : right = mid - 1 
+            // We increment both because we are not so interested in convergence
+            // we're planning on returning right after the overlap
         }
         return matrix[right] || []
     }
