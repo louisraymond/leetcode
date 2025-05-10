@@ -6,8 +6,7 @@
 
 
 var minEatingSpeed = function (piles, h) {
-    piles.sort((a, b) => a - b)
-    let left = 1, right = piles[piles.length - 1]
+    let left = 1, right = Math.max(...piles)
 
     let sessions = (k) => piles.reduce((acc, val) => acc + Math.ceil(val / k), 0)
 
