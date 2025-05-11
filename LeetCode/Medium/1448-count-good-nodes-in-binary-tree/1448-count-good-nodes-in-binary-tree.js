@@ -13,18 +13,14 @@
 var goodNodes = function (root) {
     let currentRequirement = root.val, counter = 0
 
-    let dfs = (node,requirement) => {
+    let dfs = (node, requirement) => {
         if (!node) return 0
+        if (node.val >= requirement) counter++, requirement = node.val
 
-        if (node.val >= requirement) {
-            counter++
-            requirement = node.val
-        }
-
-        if (node.left) dfs(node.left,requirement)
+        if (node.left) dfs(node.left, requirement)
         if (node.right) dfs(node.right, requirement)
     }
 
-    dfs(root,currentRequirement)
+    dfs(root, currentRequirement)
     return counter
 };
