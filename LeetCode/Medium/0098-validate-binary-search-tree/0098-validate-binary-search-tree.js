@@ -11,17 +11,12 @@
  * @return {boolean}
  */
 var isValidBST = function (root) {
-    let mustBeGreaterThan = -Infinity, mustBeLowerThan = Infinity
-
-    let dfs = (node, mustBeGreaterThan, mustBeLowerThan) => {
+    let dfs = (node, min, max) => {
         if (!node) return true
-        if (node.val <= mustBeGreaterThan || node.val >= mustBeLowerThan) return false
+        if (node.val <= min || node.val >= max) return false
 
-        let left = dfs(node.left, mustBeGreaterThan, node.val)
-        let right = dfs(node.right, node.val, mustBeLowerThan)
-
-        return left && right
+        return dfs(node.left, min, node.val) && dfs(node.right, node.val, max)
     }
 
-    return dfs(root, mustBeGreaterThan, mustBeLowerThan)
+    return dfs(root, -Infinity, Infinity)
 };
