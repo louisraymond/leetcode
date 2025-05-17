@@ -14,3 +14,5 @@ var groupAnagrams = function(strs) {
     }
     return Object.values(map)
 };
+
+// This is the worst possible solution
