@@ -14,5 +14,5 @@ def permute(nums)
         end
     end
 
-    return results
+    results
 end
