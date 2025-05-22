@@ -15,8 +15,8 @@ def roman_to_int(s)
     s.chars.each_with_index do |char, i|
         curr_val = map[char]
         next_val = map[s[i + 1]] if i + 1 < s.length
-        curr_val = next_val > curr_val ? -curr_val : curr_val if next_val
-        sum += curr_val
+
+        sum += (next_val && next_val > curr_val) ? -curr_val : curr_val
     end
 sum
 end
