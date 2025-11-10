@@ -12,6 +12,3 @@ class Solution:
                 left = k + 1
 
         return left
-
-
-# a = x if condition else y
