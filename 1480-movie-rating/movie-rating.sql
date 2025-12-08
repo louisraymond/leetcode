@@ -22,3 +22,6 @@ SELECT (SELECT m.title
         GROUP BY m.title
         ORDER BY AVG(mr.rating) DESC, m.title ASC
         LIMIT 1);  
+
+
+-- O(Nlogn+Mlogm)
