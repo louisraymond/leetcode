@@ -1,27 +1,24 @@
+-- Write your PostgreSQL query statement below
+
+
+-- Query 1: Getting the users who have rated the most movies
 SELECT (
-    SELECT u.name
-    FROM Users u
-    JOIN (
-      SELECT user_id, COUNT(*) AS cnt
-      FROM MovieRating
-      GROUP BY user_id
-    ) t ON u.user_id = t.user_id
-    ORDER BY t.cnt DESC, u.name ASC
-    LIMIT 1
-) AS results
+    SELECT name
+    FROM Users AS u
+    INNER JOIN MovieRating AS mr
+    ON u.user_id = mr.user_id
+    GROUP BY u.name
+    ORDER BY COUNT(*) DESC, name ASC
+    LIMIT 1) AS results
 
 UNION ALL
 
-SELECT (
-    SELECT m.title
-    FROM Movies m
-    JOIN (
-      SELECT movie_id, AVG(rating) AS avg_r
-      FROM MovieRating
-      WHERE EXTRACT(MONTH FROM created_at) = 2
-        AND EXTRACT(YEAR FROM created_at) = 2020
-      GROUP BY movie_id
-    ) AS ty ON m.movie_id = ty.movie_id
-    ORDER BY ty.avg_r DESC, m.title ASC
-    LIMIT 1
-) AS results;
+-- Query 2: Getting the movie name with the highest rating
+SELECT (SELECT m.title
+        FROM Movies AS m
+        INNER JOIN MovieRating AS mr
+        ON m.movie_id = mr.movie_id
+        WHERE EXTRACT(MONTH FROM mr.created_at) = 2 AND EXTRACT(YEAR FROM mr.created_at) = 2020
+        GROUP BY m.title
+        ORDER BY AVG(mr.rating) DESC, m.title ASC
+        LIMIT 1);  
