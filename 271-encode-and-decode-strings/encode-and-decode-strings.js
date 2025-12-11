@@ -4,12 +4,11 @@
  * @param {string[]} strs
  * @return {string}
  */
-var encode = function(strs) {
-    let string =""
-    for (str of strs) string += "mygap" + str
 
-    return string
+const encode = strs => {
+    return strs.map(str => `${str.length}_${str}`).join("")
 };
+
 
 /**
  * Decodes a single string to a list of strings.
@@ -17,8 +16,21 @@ var encode = function(strs) {
  * @param {string} s
  * @return {string[]}
  */
-var decode = function(s) {
-   return s.split("mygap").slice(1)
+
+const decode = s => {
+	const separator = "_", result = []
+    let i = 0
+
+    while (i < s.length) {
+        let leftIdx = i
+        while (s[i] !== separator)  i++
+
+        const len = Number(s.slice(leftIdx, i))
+        result.push(s.slice(i + 1, i + len + 1))
+
+        i = i + len + 1
+    }
+    return result;
 };
 
 /**
